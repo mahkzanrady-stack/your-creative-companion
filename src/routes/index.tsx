@@ -24,7 +24,7 @@ function Index() {
   return (
     <div className="flex min-h-screen items-center justify-center bg-muted/20 px-4">
       <div className="max-w-xl text-center">
-        <h1 className="text-3xl font-bold">ذاكرة تنفيذ المشاريع</h1>
+        <h1 className="text-3xl font-bold">مرحباً بك</h1>
         <div className="mt-6 flex justify-center">
           <Button asChild>
             <Link to="/auth">تسجيل الدخول</Link>

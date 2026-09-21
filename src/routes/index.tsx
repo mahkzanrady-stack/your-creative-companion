@@ -1,24 +1,37 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
+import { Button } from "@/components/ui/button";
+
 export const Route = createFileRoute("/")({
+  head: () => ({
+    meta: [
+      { title: "ذاكرة تنفيذ المشاريع" },
+      {
+        name: "description",
+        content: "لوحة لإدارة ذاكرة التنفيذ: المشاريع، المراحل، المهام، الدستور، القرارات ورسالة الاستئناف.",
+      },
+      { property: "og:title", content: "ذاكرة تنفيذ المشاريع" },
+      {
+        property: "og:description",
+        content: "لوحة لإدارة ذاكرة التنفيذ: المشاريع، المراحل، المهام، الدستور، القرارات ورسالة الاستئناف.",
+      },
+    ],
+  }),
   component: Index,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
 function Index() {
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
+    <div className="flex min-h-screen items-center justify-center bg-muted/20 px-4">
+      <div className="max-w-xl text-center">
+        <h1 className="text-3xl font-bold">ذاكرة تنفيذ المشاريع</h1>
+        <div className="mt-6 flex justify-center">
+          <Button asChild>
+            <Link to="/auth">تسجيل الدخول</Link>
+          </Button>
+        </div>
+      </div>
     </div>
   );
 }
+

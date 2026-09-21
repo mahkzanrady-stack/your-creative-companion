@@ -11,10 +11,10 @@ export const Route = createFileRoute("/auth")({
   ssr: false,
   head: () => ({
     meta: [
-      { title: "تسجيل الدخول — ذاكرة التنفيذ" },
-      { name: "description", content: "الدخول إلى لوحة إدارة ذاكرة تنفيذ المشاريع." },
-      { property: "og:title", content: "تسجيل الدخول — ذاكرة التنفيذ" },
-      { property: "og:description", content: "الدخول إلى لوحة إدارة ذاكرة تنفيذ المشاريع." },
+      { title: "تسجيل الدخول" },
+      { name: "description", content: "تسجيل الدخول أو إنشاء حساب جديد." },
+      { property: "og:title", content: "تسجيل الدخول" },
+      { property: "og:description", content: "تسجيل الدخول أو إنشاء حساب جديد." },
     ],
   }),
   component: AuthPage,

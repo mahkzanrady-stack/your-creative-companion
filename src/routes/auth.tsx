@@ -34,11 +34,12 @@ function AuthPage() {
   const [mode, setMode] = useState<"signin" | "signup">("signin");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [fullName, setFullName] = useState("");
   const [busy, setBusy] = useState(false);
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data }) => {
-      if (data.session) navigate({ to: "/" });
+      if (data.session) navigate({ to: "/dashboard" });
     });
   }, [navigate]);
 
@@ -50,7 +51,10 @@ function AuthPage() {
         const { error } = await supabase.auth.signUp({
           email,
           password,
-          options: { emailRedirectTo: `${window.location.origin}/` },
+          options: {
+            emailRedirectTo: `${window.location.origin}/dashboard`,
+            data: { full_name: fullName, role: "user" },
+          },
         });
         if (error) throw error;
         toast.success("تم إنشاء الحساب");
@@ -59,7 +63,7 @@ function AuthPage() {
         if (error) throw error;
       }
       const { data } = await supabase.auth.getSession();
-      if (data.session) navigate({ to: "/" });
+      if (data.session) navigate({ to: "/dashboard" });
       else toast.info("تحقق من بريدك لتأكيد الحساب ثم سجّل الدخول");
     } catch (error: any) {
       toast.error(error?.message ?? "تعذر إتمام العملية");
@@ -76,6 +80,11 @@ function AuthPage() {
         </CardHeader>
         <CardContent>
           <form className="space-y-4" onSubmit={submit}>
+            {mode === "signup" && (
+              <Field label="الاسم الكامل">
+                <Input value={fullName} onChange={(e) => setFullName(e.target.value)} required />
+              </Field>
+            )}
             <Field label="البريد الإلكتروني">
               <Input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required dir="ltr" />
             </Field>
